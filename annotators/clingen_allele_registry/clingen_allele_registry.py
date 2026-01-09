@@ -14,6 +14,7 @@ class CravatAnnotator(BaseAnnotator):
         """
         hgvs_strings = {}
         lines_to_skip = []
+        print("clingen_allele_registry.py beginss")
 
         # build hgvs strings for each input line
         for lnum, line, input_data, secondary_data in batch:
@@ -61,6 +62,7 @@ class CravatAnnotator(BaseAnnotator):
                     'allele_registry_id': ca_id
                 }
                 out_batch.append((lnum, line, input_data, secondary_data, out))
+        print("clingen_allele_registry.py clean exit")
         return out_batch
 
 
