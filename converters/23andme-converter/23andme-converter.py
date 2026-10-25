@@ -102,6 +102,17 @@ class CravatConverter(BaseConverter):
                 }
                 ret.append(wdict)
         if not ret:
+            # homozygous for the input assembly's reference: a variant only where
+            # the liftover target assembly has a different reference base (needs
+            # newer cravat)
+            if (
+                hasattr(self, 'hom_ref_mismatch_row')
+                and len(geno) == 2
+                and geno[0] == geno[1] == ref
+            ):
+                row = self.hom_ref_mismatch_row(chrom, pos, ref, tags, sample)
+                if row:
+                    return [row]
             return self.IGNORE
         if zygosity == 'hom':
             ret = ret[:1]
